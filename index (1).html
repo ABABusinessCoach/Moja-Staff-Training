@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moja Staff Training</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/quicksand@5/index.css" rel="stylesheet">
+<style>
+  :root {
+    --blue: #355574;
+    --aqua: #6dccc2;
+    --pink: #df76b6;
+    --orange: #e66d38;
+    --yellow: #efd35c;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    color: var(--blue);
+    background: #ffffff;
+    line-height: 1.6;
+  }
+
+  /* Header */
+  .header {
+    position: relative;
+    background: var(--blue);
+    padding: 40px 24px 56px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .blob {
+    position: absolute;
+    opacity: 0.35;
+    border-radius: 60% 40% 70% 30% / 50% 60% 40% 70%;
+    z-index: 0;
+  }
+  .blob.aqua { background: var(--aqua); width: 260px; height: 220px; top: -80px; left: -60px; }
+  .blob.pink { background: var(--pink); width: 220px; height: 200px; top: -50px; right: -70px; border-radius: 40% 60% 30% 70% / 60% 40% 70% 30%; }
+  .blob.yellow { background: var(--yellow); width: 180px; height: 160px; bottom: -90px; left: 40%; }
+
+  .header-content {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .logo {
+    max-width: 180px;
+    margin-bottom: 20px;
+  }
+
+  .header h1 {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 2rem;
+    margin: 0 0 8px;
+  }
+
+  .header p {
+    color: #eef4f6;
+    font-size: 1.05rem;
+    margin: 0;
+  }
+
+  /* Main container */
+  .container {
+    max-width: 800px;
+    margin: -32px auto 0;
+    padding: 0 24px 60px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 28px rgba(53, 85, 116, 0.12);
+    padding: 32px;
+    margin-bottom: 28px;
+  }
+
+  .card h2 {
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin: 0 0 6px;
+    color: var(--blue);
+  }
+
+  .rule {
+    height: 4px;
+    width: 56px;
+    background: var(--aqua);
+    border-radius: 2px;
+    margin: 0 0 20px;
+  }
+
+  /* Video */
+  .video-wrap {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 */
+    border-radius: 12px;
+    overflow: hidden;
+    background: #0f2233;
+  }
+
+  .video-wrap iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: 0;
+  }
+
+  .note {
+    background: #f4f9f8;
+    border-left: 4px solid var(--aqua);
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 0.92rem;
+    color: var(--blue);
+    margin-top: 18px;
+  }
+
+  /* Checklist / info list */
+  ul.info-list {
+    padding-left: 0;
+    margin: 0;
+    list-style: none;
+  }
+  ul.info-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-size: 0.98rem;
+  }
+  ul.info-list li::before {
+    content: "";
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    margin-top: 6px;
+    border-radius: 50%;
+    background: var(--pink);
+  }
+
+  /* Acknowledgement */
+  .ack {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f4f9f8;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-top: 8px;
+  }
+  .ack input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--aqua);
+    flex-shrink: 0;
+  }
+  .ack label {
+    font-size: 0.95rem;
+    color: var(--blue);
+  }
+
+  .field {
+    margin-bottom: 16px;
+  }
+  .field label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 6px;
+  }
+  .field input[type="text"] {
+    width: 100%;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 11px 14px;
+    border: 2px solid #dfe8ec;
+    border-radius: 10px;
+    color: var(--blue);
+    outline: none;
+  }
+  .field input[type="text"]:focus {
+    border-color: var(--aqua);
+  }
+
+  .btn {
+    display: inline-block;
+    background: var(--aqua);
+    color: #ffffff;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 13px 28px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    margin-top: 18px;
+  }
+  .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(109, 204, 194, 0.4); }
+  .btn:disabled {
+    background: #cfd8de;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .status {
+    margin-top: 12px;
+    font-size: 0.9rem;
+    color: var(--blue);
+    display: none;
+  }
+  .status.show { display: block; }
+
+  footer {
+    text-align: center;
+    padding: 24px;
+    color: #8ba0af;
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 480px) {
+    .header h1 { font-size: 1.6rem; }
+    .card { padding: 22px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="blob aqua"></div>
+    <div class="blob pink"></div>
+    <div class="blob yellow"></div>
+    <div class="header-content">
+      <img class="logo" alt="Moja Behavioral Services" src="https://i.imgur.com/6XwZQ0y.png" onerror="this.style.display='none'">
+      <h1>Staff Training</h1>
+      <p>A quick, focused session — thanks for taking the time.</p>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="card">
+      <h2>Training Video</h2>
+      <div class="rule"></div>
+
+      <div class="video-wrap">
+        <!--
+          HOW TO ADD YOUR UNLISTED YOUTUBE VIDEO:
+          1. Open the video on YouTube, click Share > Embed
+          2. Copy the video ID from that embed code (the part after /embed/)
+          3. Replace VIDEO_ID_HERE below with that ID
+          Unlisted videos embed exactly like public ones — no extra settings needed,
+          just make sure the video's privacy is set to "Unlisted" (not Private) on YouTube.
+        -->
+        <iframe
+          src="https://www.youtube.com/embed/MYne5hgMxq4"
+          title="Moja Staff Training Video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <a class="btn" href="https://www.youtube.com/watch?v=MYne5hgMxq4" target="_blank" rel="noopener" style="text-decoration:none;">▶&nbsp;&nbsp;Watch on YouTube</a>
+
+      <div class="note">
+        Player not loading above? Some clinic and school networks block embedded video — the <strong>Watch on YouTube</strong> button opens the exact same video directly. If YouTube itself says the video is unavailable, its privacy must be set to <strong>Unlisted</strong> (not Private) with embedding turned on.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Before You Get Started</h2>
+      <div class="rule"></div>
+      <ul class="info-list">
+        <li>Find a quiet spot where you can watch the full video without interruption.</li>
+        <li>This training takes about <strong>[XX] minutes</strong> — plan accordingly.</li>
+        <li>Have a notepad handy for any questions to bring to your next team meeting.</li>
+        <li>Reach out to <strong>Jill Fenniman</strong> or your supervising BCBA with any clinical questions.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Confirm Completion</h2>
+      <div class="rule"></div>
+
+      <div class="field">
+        <label for="name-input">Your Name</label>
+        <input type="text" id="name-input" placeholder="First and last name" autocomplete="name">
+      </div>
+
+      <div class="ack">
+        <input type="checkbox" id="ack-checkbox">
+        <label for="ack-checkbox">I watched this training video in full and understand the material presented.</label>
+      </div>
+      <button class="btn" id="submit-btn" disabled>Mark as Complete</button>
+      <div class="status" id="status-msg"></div>
+    </div>
+
+  </div>
+
+  <footer>
+    Moja Behavioral Services · 25 Avon St, Keene, NH 03431 · hello@mojakids.com
+  </footer>
+
+  <script>
+    const nameInput = document.getElementById('name-input');
+    const checkbox = document.getElementById('ack-checkbox');
+    const btn = document.getElementById('submit-btn');
+    const status = document.getElementById('status-msg');
+
+    function updateButtonState() {
+      const nameFilled = nameInput.value.trim().length > 0;
+      btn.disabled = !(nameFilled && checkbox.checked);
+    }
+
+    nameInput.addEventListener('input', updateButtonState);
+    checkbox.addEventListener('change', updateButtonState);
+
+    btn.addEventListener('click', () => {
+      btn.disabled = true;
+      btn.textContent = 'Completed ✓';
+      status.textContent = "✓ Thanks! Please let your supervisor know you've completed this training.";
+      status.classList.add('show');
+    });
+  </script>
+
+</body>
+</html>
